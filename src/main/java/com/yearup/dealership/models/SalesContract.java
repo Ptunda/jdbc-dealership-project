@@ -55,11 +55,13 @@ public class SalesContract {
 
     @Override
     public String toString() {
-        return "SalesContract{" +
-                "contractId=" + contractId +
-                ", vin='" + vin + '\'' +
-                ", saleDate=" + saleDate +
-                ", price=" + price +
-                '}';
+
+        return String.format("| %-15d | %-20s | %-15s | %-15.2f |", contractId, vin, saleDate.toString(), price);
+    }
+
+    public static String salesContractHeader() {
+
+        return String.format("| %-15s | %-20s | %-15s | %-15s |", "contract_id", "VIN", "sale_date", "price");
+
     }
 }

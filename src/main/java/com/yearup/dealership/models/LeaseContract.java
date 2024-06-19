@@ -66,12 +66,13 @@ public class LeaseContract {
 
     @Override
     public String toString() {
-        return "LeaseContract{" +
-                "contractId=" + contractId +
-                ", vin='" + vin + '\'' +
-                ", leaseStart=" + leaseStart +
-                ", leaseEnd=" + leaseEnd +
-                ", monthlyPayment=" + monthlyPayment +
-                '}';
+
+        return String.format("| %-15d | %-20s | %-15s | %-15s | %-17.2f |", contractId, vin, leaseStart.toString(), leaseEnd.toString(), monthlyPayment);
+    }
+
+    public static String getLeaseHeader(){
+
+        return String.format("| %-15s | %-20s | %-15s | %-15s | %-17s |", "contract_id", "VIN", "lease_start", "lease_end", "monthly_payment");
+
     }
 }

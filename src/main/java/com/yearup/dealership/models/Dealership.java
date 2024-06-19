@@ -49,11 +49,13 @@ public class Dealership {
 
     @Override
     public String toString() {
-        return "Dealership{" +
-                "dealershipId=" + dealershipId +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+
+        return String.format("| %-15d | %-20s | %-20s | %-20s |", dealershipId, name, address, phone);
+    }
+
+    public static String getDealershipHeader(){
+
+        return String.format("| %-15s | %-20s | %-20s | %-20s |", "dealership_id", "name", "address", "phone");
+
     }
 }
