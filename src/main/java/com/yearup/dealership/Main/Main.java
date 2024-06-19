@@ -18,15 +18,16 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class Main {
+
     public static void main(String[] args) {
 
-        if (args.length != 2){
+        if (args.length != 2) {
 
             System.out.println("Username and password arguments are required!");
             System.exit(1);
 
         }
-        
+
         String username = args[0];
         String password = args[1];
 
@@ -212,7 +213,7 @@ public class Main {
                         break;
                 }
             }
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
 
             System.out.println("Error occurred! Please enter number between 1 amd 7 inclusive.");
 
@@ -287,53 +288,70 @@ public class Main {
     }
 
     private static void displaySearchResults(List<Vehicle> vehicles) {
+        
         if (vehicles.isEmpty()) {
+
             System.out.println("No vehicles found.");
+
         } else {
+
             System.out.println("\nSearch Results:");
+
             for (Vehicle vehicle : vehicles) {
                 System.out.println(vehicle);
+
             }
         }
     }
 
     private static void addVehicleMenu(VehicleDao vehicleDao, InventoryDao inventoryDao, Scanner scanner) {
 
-        String vin = generateRandomVin();
+        try {
 
-        System.out.print("Enter the make: ");
-        String make = scanner.nextLine();
+            String vin = generateRandomVin();
 
-        System.out.print("Enter the model: ");
-        String model = scanner.nextLine();
+            System.out.print("Enter the make: ");
+            String make = scanner.nextLine();
 
-        System.out.print("Enter the year: ");
-        int year = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+            System.out.print("Enter the model: ");
+            String model = scanner.nextLine();
 
-        System.out.print("Enter the color: ");
-        String color = scanner.nextLine();
+            System.out.print("Enter the year: ");
+            int year = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
 
-        System.out.print("Enter the mileage: ");
-        int mileage = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+            System.out.print("Enter the color: ");
+            String color = scanner.nextLine();
 
-        System.out.print("Enter the price: ");
-        double price = scanner.nextDouble();
-        scanner.nextLine(); // Consume the newline character
+            System.out.print("Enter the mileage: ");
+            int mileage = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
 
-        System.out.print("Enter the type: ");
-        String type = scanner.nextLine();
+            System.out.print("Enter the price: ");
+            double price = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline character
 
-        System.out.print("Enter the dealership ID: ");
-        int dealershipId = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+            System.out.print("Enter the type: ");
+            String type = scanner.nextLine();
 
-        Vehicle vehicle = new Vehicle(vin, make, model, year, false, color, type, mileage, price);
-        vehicleDao.addVehicle(vehicle);
-        inventoryDao.addVehicleToInventory(vin, dealershipId);
+            System.out.print("Enter the dealership ID: ");
+            int dealershipId = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
 
-        System.out.println("Vehicle added successfully.");
+            Vehicle vehicle = new Vehicle(vin, make, model, year, false, color, type, mileage, price);
+            vehicleDao.addVehicle(vehicle);
+            inventoryDao.addVehicleToInventory(vin, dealershipId);
+
+            System.out.println("Vehicle added successfully.");
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Invalid input. Please try again. " + e.getMessage());
+            scanner.nextLine(); // clear invalid input
+
+        }
+
+
     }
 
     private static void removeVehicleMenu(VehicleDao vehicleDao, InventoryDao inventoryDao, Scanner scanner) {
