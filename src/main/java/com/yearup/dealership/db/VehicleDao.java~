@@ -112,9 +112,9 @@ public class VehicleDao {
         return vehicles;
     }
 
-    public List<Vehicle> searchByMakeModel(String userInputMake, String userInputModel) {
+    public List<Vehicle> searchByMakeModel(String make, String model) {
 
-       
+        // TODO: Implement the logic to search vehicles by make and model
         List<Vehicle> vehicles = new ArrayList<>();
 
         String searchByMakeModelSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE make = ? AND model = ?;";
@@ -123,10 +123,10 @@ public class VehicleDao {
             PreparedStatement searchByMakeModelPreparedStatement = connection.prepareStatement(searchByMakeModelSQL)
         ) {
 
-            searchByMakeModelPreparedStatement.setString(1, userInputMake);
-            searchByMakeModelPreparedStatement.setString(2, userInputModel);
+            searchByMakeModelPreparedStatement.setString(1, make);
+            searchByMakeModelPreparedStatement.setString(2, model);
 
-            try (ResultSet resultSet = searchByMakeModelPreparedStatement.executeQuery()){
+            try (ResultSet resultSet = searchByPriceRangePreparedStatement.executeQuery()){
 
                 while (resultSet.next()){
 
