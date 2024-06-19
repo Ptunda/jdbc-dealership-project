@@ -31,11 +31,12 @@ public class Main {
         String username = args[0];
         String password = args[1];
 
+
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setUrl("jdbc:mysql://localhost:3306/car_dealership");
-
         dataSource.setUsername(username);
         dataSource.setPassword(password);
+
 
         // Create instances of required DAO classes
         VehicleDao vehicleDao = new VehicleDao(dataSource);
@@ -43,8 +44,10 @@ public class Main {
         SalesDao salesDao = new SalesDao(dataSource);
         LeaseDao leaseDao = new LeaseDao(dataSource);
 
+
         // Create a Scanner object for user input
         Scanner scanner = new Scanner(System.in);
+        
 
         boolean exit = false;
 
