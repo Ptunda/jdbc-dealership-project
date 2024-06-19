@@ -69,7 +69,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
 
-        
+
         List<Vehicle> vehicles = new ArrayList<>();
 
         String searchByPriceRangeSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE price BETWEEN ? AND ?;";
@@ -109,7 +109,7 @@ public class VehicleDao {
 
         }
 
-        return
+        return vehicles;
     }
 
     public List<Vehicle> searchByMakeModel(String make, String model) {
