@@ -206,7 +206,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByColor(String userInputColor) {
 
-        
+
         List<Vehicle> vehicles = new ArrayList<>();
 
         String searchByColorSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE color = ?;";
@@ -249,9 +249,49 @@ public class VehicleDao {
         return vehicles;
     }
 
-    public List<Vehicle> searchByMileageRange(int minMileage, int maxMileage) {
-        // TODO: Implement the logic to search vehicles by mileage range
-        return new ArrayList<>();
+    public List<Vehicle> searchByMileageRange(int userInputMinMileage, int userInputMaxMileage) {
+
+        
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        String searchByMileageRangeSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE odometer BETWEEN ? AND ?;";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement searchByMileageRangePreparedStatement = connection.prepareStatement(searchByMileageRangeSQL)
+        ) {
+
+            searchByMileageRangePreparedStatement.setInt(1, userInputMinMileage);
+            searchByMileageRangePreparedStatement.setInt(2, userInputMaxMileage);
+
+            try (ResultSet resultSet = searchByMileageRangePreparedStatement.executeQuery()) {
+
+                while (resultSet.next()) {
+
+                    String VIN = resultSet.getString(1);
+                    String make = resultSet.getString(2);
+                    String model = resultSet.getString(3);
+                    int year = resultSet.getInt(4);
+                    boolean sold = resultSet.getBoolean(5);
+                    String color = resultSet.getString(6);
+                    String vehicleType = resultSet.getString(7);
+                    int odometer = resultSet.getInt(8);
+                    double price = resultSet.getDouble(9);
+
+                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+
+                    vehicles.add(vehicle);
+
+                }
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Error finding vehicles. " + e.getMessage());
+
+        }
+
+        return vehicles;
     }
 
     public List<Vehicle> searchByType(String type) {
