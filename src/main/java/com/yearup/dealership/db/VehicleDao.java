@@ -48,7 +48,7 @@ public class VehicleDao {
 
     public void removeVehicle(String VIN) {
 
-        
+
         String removeVehicleSQL = "DELETE FROM vehicles\n" + "WHERE VIN = ?";
 
         try(Connection connection = dataSource.getConnection();
@@ -68,8 +68,48 @@ public class VehicleDao {
     }
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
-        // TODO: Implement the logic to search vehicles by price range
-        return new ArrayList<>();
+
+        
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        String searchByPriceRangeSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE price BETWEEN ? AND ?;";
+
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement searchByPriceRangePreparedStatement = connection.prepareStatement(searchByPriceRangeSQL)
+        ) {
+
+            searchByPriceRangePreparedStatement.setDouble(1, minPrice);
+            searchByPriceRangePreparedStatement.setDouble(2, maxPrice);
+
+            try (ResultSet resultSet = searchByPriceRangePreparedStatement.executeQuery()){
+
+                while (resultSet.next()){
+
+                    String VIN = resultSet.getString(1);
+                    String make = resultSet.getString(2);
+                    String model = resultSet.getString(3);
+                    int year = resultSet.getInt(4);
+                    boolean sold = resultSet.getBoolean(5);
+                    String color = resultSet.getString(6);
+                    String vehicleType = resultSet.getString(7);
+                    int odometer = resultSet.getInt(8);
+                    double price = resultSet.getDouble(9);
+
+                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+
+                    vehicles.add(vehicle);
+
+                }
+
+            }
+
+        }catch (SQLException e){
+
+            System.out.println("Error finding vehicles. " + e.getMessage());
+
+        }
+
+        return
     }
 
     public List<Vehicle> searchByMakeModel(String make, String model) {
