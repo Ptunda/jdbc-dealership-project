@@ -160,7 +160,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByYearRange(int userInputMinYear, int userInputMaxYear) {
 
-        
+
         List<Vehicle> vehicles = new ArrayList<>();
 
         String searchByMakeModelSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE year BETWEEN ? AND ?;";
@@ -204,9 +204,49 @@ public class VehicleDao {
 
     }
 
-    public List<Vehicle> searchByColor(String color) {
-        // TODO: Implement the logic to search vehicles by color
-        return new ArrayList<>();
+    public List<Vehicle> searchByColor(String userInputColor) {
+
+        
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        String searchByColorSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE color = ?;";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement searchByColorPreparedStatement = connection.prepareStatement(searchByColorSQL)
+        ) {
+
+            searchByColorPreparedStatement.setString(1, userInputColor);
+
+
+            try (ResultSet resultSet = searchByColorPreparedStatement.executeQuery()) {
+
+                while (resultSet.next()) {
+
+                    String VIN = resultSet.getString(1);
+                    String make = resultSet.getString(2);
+                    String model = resultSet.getString(3);
+                    int year = resultSet.getInt(4);
+                    boolean sold = resultSet.getBoolean(5);
+                    String color = resultSet.getString(6);
+                    String vehicleType = resultSet.getString(7);
+                    int odometer = resultSet.getInt(8);
+                    double price = resultSet.getDouble(9);
+
+                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+
+                    vehicles.add(vehicle);
+
+                }
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Error finding vehicles. " + e.getMessage());
+
+        }
+
+        return vehicles;
     }
 
     public List<Vehicle> searchByMileageRange(int minMileage, int maxMileage) {
