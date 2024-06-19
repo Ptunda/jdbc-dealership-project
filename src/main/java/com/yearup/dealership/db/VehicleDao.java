@@ -85,17 +85,7 @@ public class VehicleDao {
 
                 while (resultSet.next()) {
 
-                    String VIN = resultSet.getString(1);
-                    String make = resultSet.getString(2);
-                    String model = resultSet.getString(3);
-                    int year = resultSet.getInt(4);
-                    boolean sold = resultSet.getBoolean(5);
-                    String color = resultSet.getString(6);
-                    String vehicleType = resultSet.getString(7);
-                    int odometer = resultSet.getInt(8);
-                    double price = resultSet.getDouble(9);
-
-                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+                    Vehicle vehicle = createVehicleFromResultSet(resultSet);
 
                     vehicles.add(vehicle);
 
@@ -130,17 +120,7 @@ public class VehicleDao {
 
                 while (resultSet.next()) {
 
-                    String VIN = resultSet.getString(1);
-                    String make = resultSet.getString(2);
-                    String model = resultSet.getString(3);
-                    int year = resultSet.getInt(4);
-                    boolean sold = resultSet.getBoolean(5);
-                    String color = resultSet.getString(6);
-                    String vehicleType = resultSet.getString(7);
-                    int odometer = resultSet.getInt(8);
-                    double price = resultSet.getDouble(9);
-
-                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+                    Vehicle vehicle = createVehicleFromResultSet(resultSet);
 
                     vehicles.add(vehicle);
 
@@ -176,17 +156,7 @@ public class VehicleDao {
 
                 while (resultSet.next()) {
 
-                    String VIN = resultSet.getString(1);
-                    String make = resultSet.getString(2);
-                    String model = resultSet.getString(3);
-                    int year = resultSet.getInt(4);
-                    boolean sold = resultSet.getBoolean(5);
-                    String color = resultSet.getString(6);
-                    String vehicleType = resultSet.getString(7);
-                    int odometer = resultSet.getInt(8);
-                    double price = resultSet.getDouble(9);
-
-                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+                    Vehicle vehicle = createVehicleFromResultSet(resultSet);
 
                     vehicles.add(vehicle);
 
@@ -222,17 +192,7 @@ public class VehicleDao {
 
                 while (resultSet.next()) {
 
-                    String VIN = resultSet.getString(1);
-                    String make = resultSet.getString(2);
-                    String model = resultSet.getString(3);
-                    int year = resultSet.getInt(4);
-                    boolean sold = resultSet.getBoolean(5);
-                    String color = resultSet.getString(6);
-                    String vehicleType = resultSet.getString(7);
-                    int odometer = resultSet.getInt(8);
-                    double price = resultSet.getDouble(9);
-
-                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+                    Vehicle vehicle = createVehicleFromResultSet(resultSet);
 
                     vehicles.add(vehicle);
 
@@ -267,17 +227,7 @@ public class VehicleDao {
 
                 while (resultSet.next()) {
 
-                    String VIN = resultSet.getString(1);
-                    String make = resultSet.getString(2);
-                    String model = resultSet.getString(3);
-                    int year = resultSet.getInt(4);
-                    boolean sold = resultSet.getBoolean(5);
-                    String color = resultSet.getString(6);
-                    String vehicleType = resultSet.getString(7);
-                    int odometer = resultSet.getInt(8);
-                    double price = resultSet.getDouble(9);
-
-                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+                    Vehicle vehicle = createVehicleFromResultSet(resultSet);
 
                     vehicles.add(vehicle);
 
@@ -296,7 +246,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByType(String userInputType) {
 
-        
+
         List<Vehicle> vehicles = new ArrayList<>();
 
         String searchByTypeSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE vehicleType = ?;";
@@ -312,17 +262,7 @@ public class VehicleDao {
 
                 while (resultSet.next()) {
 
-                    String VIN = resultSet.getString(1);
-                    String make = resultSet.getString(2);
-                    String model = resultSet.getString(3);
-                    int year = resultSet.getInt(4);
-                    boolean sold = resultSet.getBoolean(5);
-                    String color = resultSet.getString(6);
-                    String vehicleType = resultSet.getString(7);
-                    int odometer = resultSet.getInt(8);
-                    double price = resultSet.getDouble(9);
-
-                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+                    Vehicle vehicle = createVehicleFromResultSet(resultSet);
 
                     vehicles.add(vehicle);
 
