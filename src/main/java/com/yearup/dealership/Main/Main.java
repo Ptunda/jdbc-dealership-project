@@ -87,7 +87,7 @@ public class Main {
 
         } catch (InputMismatchException e) {
 
-            System.out.println("Error occurred! Please enter a number between 1 to 5, inclusive.");
+            System.err.println("Error occurred! Please enter a number between 1 to 5, inclusive. " + e.getMessage());
             scanner.nextLine();
 
         }
@@ -125,7 +125,7 @@ public class Main {
 
         } catch (InputMismatchException e) {
 
-            System.out.println("Error occurred! Enter number between 1 and 2, inclusive.");
+            System.err.println("Error occurred! Enter number between 1 and 2, inclusive. " + e.getMessage());
             scanner.nextLine();
 
         }
@@ -152,7 +152,7 @@ public class Main {
 
         } catch (Exception e) {
 
-            System.out.println("Error adding sales contract. " + e.getMessage());
+            System.err.println("Error adding sales contract. " + e.getMessage());
             scanner.nextLine();
 
         }
@@ -182,7 +182,7 @@ public class Main {
 
         } catch (Exception e) {
 
-            System.out.println("Error adding lease contract. " + e.getMessage());
+            System.err.println("Error adding lease contract. " + e.getMessage());
             scanner.nextLine();
 
         }
@@ -239,7 +239,7 @@ public class Main {
             }
         } catch (InputMismatchException e) {
 
-            System.out.println("Error occurred! Please enter number between 1 amd 7 inclusive. " + e.getMessage());
+            System.err.println("Error occurred! Please enter number between 1 amd 7 inclusive. " + e.getMessage());
             scanner.nextLine();
 
         }
@@ -263,7 +263,7 @@ public class Main {
 
         } catch (InputMismatchException e) {
 
-            System.out.println("Invalid input for price. Please enter a number. " + e.getMessage());
+            System.err.println("Invalid input for price. Please enter a number. " + e.getMessage());
             scanner.nextLine();
 
         }
@@ -300,7 +300,7 @@ public class Main {
 
         } catch (InputMismatchException e) {
 
-            System.out.println("Invalid input for year. Please enter a number. " + e.getMessage());
+            System.err.println("Invalid input for year. Please enter a number. " + e.getMessage());
             scanner.nextLine();
 
         }
@@ -333,7 +333,7 @@ public class Main {
 
         } catch (InputMismatchException e) {
 
-            System.out.println("Invalid input for mileage. Please enter a number. " + e.getMessage());
+            System.err.println("Invalid input for mileage. Please enter a number. " + e.getMessage());
             scanner.nextLine();
 
         }
@@ -410,7 +410,7 @@ public class Main {
 
         } catch (InputMismatchException e) {
 
-            System.out.println("Invalid input. Please try again. " + e.getMessage());
+            System.err.println("Invalid input. Please try again. " + e.getMessage());
             scanner.nextLine(); // clear invalid input
 
         }

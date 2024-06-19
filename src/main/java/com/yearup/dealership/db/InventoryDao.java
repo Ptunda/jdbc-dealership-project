@@ -31,7 +31,7 @@ public class InventoryDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error adding vehicle to inventory " + e.getMessage());
+            System.err.println("Error adding vehicle to inventory " + e.getMessage());
 
         }
 
@@ -52,7 +52,7 @@ public class InventoryDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error removing vehicle from inventory " + e.getMessage());
+            System.err.println("Error removing vehicle from inventory " + e.getMessage());
 
         }
 

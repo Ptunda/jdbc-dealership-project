@@ -38,7 +38,7 @@ public class LeaseDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error adding lease contract " + e.getMessage());
+            System.err.println("Error adding lease contract " + e.getMessage());
 
         }
 

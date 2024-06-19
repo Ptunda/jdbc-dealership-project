@@ -40,7 +40,7 @@ public class VehicleDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error adding vehicle" + e.getMessage());
+            System.err.println("Error adding vehicle" + e.getMessage());
 
         }
 
@@ -61,7 +61,7 @@ public class VehicleDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error removing vehicle. " + e.getMessage());
+            System.err.println("Error removing vehicle. " + e.getMessage());
 
         }
 
@@ -95,7 +95,7 @@ public class VehicleDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error finding vehicles. " + e.getMessage());
+            System.err.println("Error finding vehicles. " + e.getMessage());
 
         }
 
@@ -130,7 +130,7 @@ public class VehicleDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error finding vehicles. " + e.getMessage());
+            System.err.println("Error finding vehicles. " + e.getMessage());
 
         }
 
@@ -166,7 +166,7 @@ public class VehicleDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error finding vehicles. " + e.getMessage());
+            System.err.println("Error finding vehicles. " + e.getMessage());
 
         }
 
@@ -202,7 +202,7 @@ public class VehicleDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error finding vehicles. " + e.getMessage());
+            System.err.println("Error finding vehicles. " + e.getMessage());
 
         }
 
@@ -237,7 +237,7 @@ public class VehicleDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error finding vehicles. " + e.getMessage());
+            System.err.println("Error finding vehicles. " + e.getMessage());
 
         }
 
@@ -272,7 +272,7 @@ public class VehicleDao {
 
         } catch (SQLException e) {
 
-            System.out.println("Error finding vehicles. " + e.getMessage());
+            System.err.println("Error finding vehicles. " + e.getMessage());
 
         }
 
