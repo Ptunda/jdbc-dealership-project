@@ -39,7 +39,7 @@ public class InventoryDao {
 
     public void removeVehicleFromInventory(String vin) {
 
-        
+
         String removeVehicleFromInventorySQL = "DELETE FROM inventory\n" + "WHERE VIN = ?";
 
         try (Connection connection = dataSource.getConnection();
