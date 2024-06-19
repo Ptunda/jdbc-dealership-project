@@ -8,14 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleDao {
+
     private DataSource dataSource;
 
     public VehicleDao(DataSource dataSource) {
+
         this.dataSource = dataSource;
+
     }
 
     public void addVehicle(Vehicle vehicle) {
+
         // TODO: Implement the logic to add a vehicle
+
     }
 
     public void removeVehicle(String VIN) {

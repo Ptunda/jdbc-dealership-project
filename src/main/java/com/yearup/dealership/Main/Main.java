@@ -192,6 +192,7 @@ public class Main {
 
 
     private static void searchVehiclesMenu(VehicleDao vehicleDao, Scanner scanner) {
+
         boolean back = false;
 
         try {
@@ -300,12 +301,14 @@ public class Main {
         } catch (InputMismatchException e) {
 
             System.out.println("Invalid input for year. Please enter a number. " + e.getMessage());
+            scanner.nextLine();
 
         }
 
     }
 
     private static void searchByColor(VehicleDao vehicleDao, Scanner scanner) {
+
         System.out.print("Enter the color: ");
         String color = scanner.nextLine();
 
@@ -416,6 +419,7 @@ public class Main {
     }
 
     private static void removeVehicleMenu(VehicleDao vehicleDao, InventoryDao inventoryDao, Scanner scanner) {
+
         System.out.print("Enter the VIN of the vehicle to remove: ");
         String vin = scanner.nextLine();
 
@@ -426,11 +430,13 @@ public class Main {
     }
 
     public static String generateRandomVin() {
+
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString().toUpperCase().replaceAll("-", "");
         // Assuming VIN length is 17 characters, you can adjust this if needed
         String vin = randomUUIDString.substring(0, 17);
         return vin;
+
     }
 
 }
