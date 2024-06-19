@@ -88,6 +88,7 @@ public class Main {
         } catch (InputMismatchException e) {
 
             System.out.println("Error occurred! Please enter a number between 1 to 5, inclusive.");
+            scanner.nextLine();
 
         }
 
@@ -125,6 +126,7 @@ public class Main {
         } catch (InputMismatchException e) {
 
             System.out.println("Error occurred! Enter number between 1 and 2, inclusive.");
+            scanner.nextLine();
 
         }
 
@@ -133,38 +135,59 @@ public class Main {
 
     private static void addSalesContract(SalesDao salesDao, String vin, Scanner scanner) {
 
-        System.out.print("Enter the sale date (YYYY-MM-DD): ");
-        String saleDateStr = scanner.nextLine();
-        LocalDate saleDate = LocalDate.parse(saleDateStr);
+        try {
 
-        System.out.print("Enter the price: ");
-        double price = scanner.nextDouble();
-        scanner.nextLine(); // Consume the newline character
+            System.out.print("Enter the sale date (YYYY-MM-DD): ");
+            String saleDateStr = scanner.nextLine();
+            LocalDate saleDate = LocalDate.parse(saleDateStr);
 
-        SalesContract salesContract = new SalesContract(vin, saleDate, price);
-        salesDao.addSalesContract(salesContract);
+            System.out.print("Enter the price: ");
+            double price = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline character
 
-        System.out.println("Sales contract added successfully.");
+            SalesContract salesContract = new SalesContract(vin, saleDate, price);
+            salesDao.addSalesContract(salesContract);
+
+            System.out.println("Sales contract added successfully.");
+
+        } catch (Exception e) {
+
+            System.out.println("Error adding sales contract. " + e.getMessage());
+            scanner.nextLine();
+
+        }
+
     }
 
     private static void addLeaseContract(LeaseDao leaseDao, String vin, Scanner scanner) {
 
-        System.out.print("Enter the lease start date (YYYY-MM-DD): ");
-        String leaseStartDateStr = scanner.nextLine();
-        LocalDate leaseStartDate = LocalDate.parse(leaseStartDateStr);
+        try {
 
-        System.out.print("Enter the lease end date (YYYY-MM-DD): ");
-        String leaseEndDateStr = scanner.nextLine();
-        LocalDate leaseEndDate = LocalDate.parse(leaseEndDateStr);
+            System.out.print("Enter the lease start date (YYYY-MM-DD): ");
+            String leaseStartDateStr = scanner.nextLine();
+            LocalDate leaseStartDate = LocalDate.parse(leaseStartDateStr);
 
-        System.out.print("Enter the monthly payment: ");
-        double monthlyPayment = scanner.nextDouble();
-        scanner.nextLine(); // Consume the newline character
+            System.out.print("Enter the lease end date (YYYY-MM-DD): ");
+            String leaseEndDateStr = scanner.nextLine();
+            LocalDate leaseEndDate = LocalDate.parse(leaseEndDateStr);
 
-        LeaseContract leaseContract = new LeaseContract(vin, leaseStartDate, leaseEndDate, monthlyPayment);
-        leaseDao.addLeaseContract(leaseContract);
+            System.out.print("Enter the monthly payment: ");
+            double monthlyPayment = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline character
 
-        System.out.println("Lease contract added successfully.");
+            LeaseContract leaseContract = new LeaseContract(vin, leaseStartDate, leaseEndDate, monthlyPayment);
+            leaseDao.addLeaseContract(leaseContract);
+
+            System.out.println("Lease contract added successfully.");
+
+        } catch (Exception e) {
+
+            System.out.println("Error adding lease contract. " + e.getMessage());
+            scanner.nextLine();
+
+        }
+
+
     }
 
 
@@ -215,26 +238,39 @@ public class Main {
             }
         } catch (InputMismatchException e) {
 
-            System.out.println("Error occurred! Please enter number between 1 amd 7 inclusive.");
+            System.out.println("Error occurred! Please enter number between 1 amd 7 inclusive. " + e.getMessage());
+            scanner.nextLine();
 
         }
 
     }
 
     private static void searchByPriceRange(VehicleDao vehicleDao, Scanner scanner) {
-        System.out.print("Enter the minimum price: ");
-        double minPrice = scanner.nextDouble();
-        scanner.nextLine(); // Consume the newline character
 
-        System.out.print("Enter the maximum price: ");
-        double maxPrice = scanner.nextDouble();
-        scanner.nextLine(); // Consume the newline character
+        try {
 
-        List<Vehicle> vehicles = vehicleDao.searchByPriceRange(minPrice, maxPrice);
-        displaySearchResults(vehicles);
+            System.out.print("Enter the minimum price: ");
+            double minPrice = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline character
+
+            System.out.print("Enter the maximum price: ");
+            double maxPrice = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline character
+
+            List<Vehicle> vehicles = vehicleDao.searchByPriceRange(minPrice, maxPrice);
+            displaySearchResults(vehicles);
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Invalid input for price. Please enter a number. " + e.getMessage());
+            scanner.nextLine();
+
+        }
+
     }
 
     private static void searchByMakeAndModel(VehicleDao vehicleDao, Scanner scanner) {
+
         System.out.print("Enter the make: ");
         String make = scanner.nextLine();
 
@@ -243,19 +279,30 @@ public class Main {
 
         List<Vehicle> vehicles = vehicleDao.searchByMakeModel(make, model);
         displaySearchResults(vehicles);
+
     }
 
     private static void searchByYearRange(VehicleDao vehicleDao, Scanner scanner) {
-        System.out.print("Enter the minimum year: ");
-        int minYear = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
 
-        System.out.print("Enter the maximum year: ");
-        int maxYear = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        try {
 
-        List<Vehicle> vehicles = vehicleDao.searchByYearRange(minYear, maxYear);
-        displaySearchResults(vehicles);
+            System.out.print("Enter the minimum year: ");
+            int minYear = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            System.out.print("Enter the maximum year: ");
+            int maxYear = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            List<Vehicle> vehicles = vehicleDao.searchByYearRange(minYear, maxYear);
+            displaySearchResults(vehicles);
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Invalid input for year. Please enter a number. " + e.getMessage());
+
+        }
+
     }
 
     private static void searchByColor(VehicleDao vehicleDao, Scanner scanner) {
@@ -284,6 +331,7 @@ public class Main {
         } catch (InputMismatchException e) {
 
             System.out.println("Invalid input for mileage. Please enter a number. " + e.getMessage());
+            scanner.nextLine();
 
         }
 
