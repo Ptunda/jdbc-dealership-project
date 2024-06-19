@@ -267,28 +267,41 @@ public class Main {
     }
 
     private static void searchByMileageRange(VehicleDao vehicleDao, Scanner scanner) {
-        System.out.print("Enter the minimum mileage: ");
-        int minMileage = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
 
-        System.out.print("Enter the maximum mileage: ");
-        int maxMileage = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        try {
 
-        List<Vehicle> vehicles = vehicleDao.searchByMileageRange(minMileage, maxMileage);
-        displaySearchResults(vehicles);
+            System.out.print("Enter the minimum mileage: ");
+            int minMileage = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            System.out.print("Enter the maximum mileage: ");
+            int maxMileage = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            List<Vehicle> vehicles = vehicleDao.searchByMileageRange(minMileage, maxMileage);
+            displaySearchResults(vehicles);
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Invalid input for mileage. Please enter a number. " + e.getMessage());
+
+        }
+
+
     }
 
     private static void searchByType(VehicleDao vehicleDao, Scanner scanner) {
+
         System.out.print("Enter the vehicle type: ");
         String type = scanner.nextLine();
 
         List<Vehicle> vehicles = vehicleDao.searchByType(type);
         displaySearchResults(vehicles);
+
     }
 
     private static void displaySearchResults(List<Vehicle> vehicles) {
-        
+
         if (vehicles.isEmpty()) {
 
             System.out.println("No vehicles found.");
