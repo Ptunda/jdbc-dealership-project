@@ -19,7 +19,7 @@ public class VehicleDao {
 
     public void addVehicle(Vehicle vehicle) {
 
-        
+
         String insertVehicleSQL = "INSERT INTO vehicles\n" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
@@ -47,7 +47,24 @@ public class VehicleDao {
     }
 
     public void removeVehicle(String VIN) {
-        // TODO: Implement the logic to remove a vehicle
+
+        
+        String removeVehicleSQL = "DELETE FROM vehicles\n" + "WHERE VIN = ?";
+
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement removeVehiclePreparedStatement = connection.prepareStatement(removeVehicleSQL)
+        ) {
+
+            removeVehiclePreparedStatement.setString(1, VIN);
+
+            removeVehiclePreparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+
+            System.out.println("Error removing vehicle. " + e.getMessage());
+
+        }
+
     }
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
