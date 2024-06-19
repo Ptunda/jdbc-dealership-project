@@ -51,15 +51,15 @@ public class VehicleDao {
 
         String removeVehicleSQL = "DELETE FROM vehicles\n" + "WHERE VIN = ?";
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement removeVehiclePreparedStatement = connection.prepareStatement(removeVehicleSQL)
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement removeVehiclePreparedStatement = connection.prepareStatement(removeVehicleSQL)
         ) {
 
             removeVehiclePreparedStatement.setString(1, VIN);
 
             removeVehiclePreparedStatement.executeUpdate();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
             System.out.println("Error removing vehicle. " + e.getMessage());
 
@@ -74,16 +74,16 @@ public class VehicleDao {
 
         String searchByPriceRangeSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE price BETWEEN ? AND ?;";
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement searchByPriceRangePreparedStatement = connection.prepareStatement(searchByPriceRangeSQL)
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement searchByPriceRangePreparedStatement = connection.prepareStatement(searchByPriceRangeSQL)
         ) {
 
             searchByPriceRangePreparedStatement.setDouble(1, minPrice);
             searchByPriceRangePreparedStatement.setDouble(2, maxPrice);
 
-            try (ResultSet resultSet = searchByPriceRangePreparedStatement.executeQuery()){
+            try (ResultSet resultSet = searchByPriceRangePreparedStatement.executeQuery()) {
 
-                while (resultSet.next()){
+                while (resultSet.next()) {
 
                     String VIN = resultSet.getString(1);
                     String make = resultSet.getString(2);
@@ -103,7 +103,7 @@ public class VehicleDao {
 
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
             System.out.println("Error finding vehicles. " + e.getMessage());
 
@@ -114,21 +114,21 @@ public class VehicleDao {
 
     public List<Vehicle> searchByMakeModel(String userInputMake, String userInputModel) {
 
-       
+
         List<Vehicle> vehicles = new ArrayList<>();
 
         String searchByMakeModelSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE make = ? AND model = ?;";
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement searchByMakeModelPreparedStatement = connection.prepareStatement(searchByMakeModelSQL)
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement searchByMakeModelPreparedStatement = connection.prepareStatement(searchByMakeModelSQL)
         ) {
 
             searchByMakeModelPreparedStatement.setString(1, userInputMake);
             searchByMakeModelPreparedStatement.setString(2, userInputModel);
 
-            try (ResultSet resultSet = searchByMakeModelPreparedStatement.executeQuery()){
+            try (ResultSet resultSet = searchByMakeModelPreparedStatement.executeQuery()) {
 
-                while (resultSet.next()){
+                while (resultSet.next()) {
 
                     String VIN = resultSet.getString(1);
                     String make = resultSet.getString(2);
@@ -148,18 +148,60 @@ public class VehicleDao {
 
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
             System.out.println("Error finding vehicles. " + e.getMessage());
 
         }
 
         return vehicles;
+
     }
 
-    public List<Vehicle> searchByYearRange(int minYear, int maxYear) {
-        // TODO: Implement the logic to search vehicles by year range
-        return new ArrayList<>();
+    public List<Vehicle> searchByYearRange(int userInputMinYear, int userInputMaxYear) {
+
+        
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        String searchByMakeModelSQL = "SELECT *\n" + "FROM vehicles\n" + "WHERE year BETWEEN ? AND ?;";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement searchByMakeModelPreparedStatement = connection.prepareStatement(searchByMakeModelSQL)
+        ) {
+
+            searchByMakeModelPreparedStatement.setInt(1, userInputMinYear);
+            searchByMakeModelPreparedStatement.setInt(2, userInputMaxYear);
+
+            try (ResultSet resultSet = searchByMakeModelPreparedStatement.executeQuery()) {
+
+                while (resultSet.next()) {
+
+                    String VIN = resultSet.getString(1);
+                    String make = resultSet.getString(2);
+                    String model = resultSet.getString(3);
+                    int year = resultSet.getInt(4);
+                    boolean sold = resultSet.getBoolean(5);
+                    String color = resultSet.getString(6);
+                    String vehicleType = resultSet.getString(7);
+                    int odometer = resultSet.getInt(8);
+                    double price = resultSet.getDouble(9);
+
+                    Vehicle vehicle = new Vehicle(VIN, make, model, year, sold, color, vehicleType, odometer, price);
+
+                    vehicles.add(vehicle);
+
+                }
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Error finding vehicles. " + e.getMessage());
+
+        }
+
+        return vehicles;
+
     }
 
     public List<Vehicle> searchByColor(String color) {
