@@ -12,6 +12,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -37,64 +38,88 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         boolean exit = false;
-        while (!exit) {
-            System.out.println("Main Menu:");
-            System.out.println("1. Search vehicles");
-            System.out.println("2. Add a vehicle");
-            System.out.println("3. Add a contract");
-            System.out.println("4. Remove a vehicle");
-            System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
 
-            switch (choice) {
-                case 1:
-                    searchVehiclesMenu(vehicleDao, scanner);
-                    break;
-                case 2:
-                    addVehicleMenu(vehicleDao, inventoryDao, scanner);
-                    break;
-                case 3:
-                    addContractMenu(salesDao, leaseDao, scanner);
-                    break;
-                case 4:
-                    removeVehicleMenu(vehicleDao, inventoryDao, scanner);
-                    break;
-                case 5:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+        try {
+
+            while (!exit) {
+                System.out.println("Main Menu:");
+                System.out.println("1. Search vehicles");
+                System.out.println("2. Add a vehicle");
+                System.out.println("3. Add a contract");
+                System.out.println("4. Remove a vehicle");
+                System.out.println("5. Exit");
+                System.out.print("Enter your choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+
+                switch (choice) {
+                    case 1:
+                        searchVehiclesMenu(vehicleDao, scanner);
+                        break;
+                    case 2:
+                        addVehicleMenu(vehicleDao, inventoryDao, scanner);
+                        break;
+                    case 3:
+                        addContractMenu(salesDao, leaseDao, scanner);
+                        break;
+                    case 4:
+                        removeVehicleMenu(vehicleDao, inventoryDao, scanner);
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
+
             }
+
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Error occurred! Please enter a number between 1 to 5, inclusive.");
+
         }
 
         scanner.close();
     }
 
     private static void addContractMenu(SalesDao salesDao, LeaseDao leaseDao, Scanner scanner) {
+
+
         System.out.print("Enter the VIN of the vehicle to add a contract: ");
         String vin = scanner.nextLine();
 
-        System.out.println("\nSelect a contract type:");
-        System.out.println("1. Sales Contract");
-        System.out.println("2. Lease Contract");
-        System.out.print("Enter your choice: ");
-        int contractTypeChoice = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
 
-        switch (contractTypeChoice) {
-            case 1:
-                addSalesContract(salesDao, vin, scanner);
-                break;
-            case 2:
-                addLeaseContract(leaseDao, vin, scanner);
-                break;
-            default:
-                System.out.println("Invalid choice. Contract not added.");
-                break;
+        try {
+
+            System.out.println("\nSelect a contract type:");
+            System.out.println("1. Sales Contract");
+            System.out.println("2. Lease Contract");
+            System.out.print("Enter your choice: ");
+            int contractTypeChoice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (contractTypeChoice) {
+                case 1:
+                    addSalesContract(salesDao, vin, scanner);
+                    break;
+                case 2:
+                    addLeaseContract(leaseDao, vin, scanner);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Contract not added.");
+                    break;
+            }
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Error occurred! Enter number between 1 and 2, inclusive.");
+
         }
+
+
     }
 
     private static void addSalesContract(SalesDao salesDao, String vin, Scanner scanner) {
@@ -136,46 +161,55 @@ public class Main {
 
     private static void searchVehiclesMenu(VehicleDao vehicleDao, Scanner scanner) {
         boolean back = false;
-        while (!back) {
-            System.out.println("\nSearch Vehicles:");
-            System.out.println("1. By price range");
-            System.out.println("2. By make/model");
-            System.out.println("3. By year range");
-            System.out.println("4. By color");
-            System.out.println("5. By mileage range");
-            System.out.println("6. By type");
-            System.out.println("7. Back to Main Menu");
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
 
-            switch (choice) {
-                case 1:
-                    searchByPriceRange(vehicleDao, scanner);
-                    break;
-                case 2:
-                    searchByMakeAndModel(vehicleDao, scanner);
-                    break;
-                case 3:
-                    searchByYearRange(vehicleDao, scanner);
-                    break;
-                case 4:
-                    searchByColor(vehicleDao, scanner);
-                    break;
-                case 5:
-                    searchByMileageRange(vehicleDao, scanner);
-                    break;
-                case 6:
-                    searchByType(vehicleDao, scanner);
-                    break;
-                case 7:
-                    back = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+        try {
+
+            while (!back) {
+                System.out.println("\nSearch Vehicles:");
+                System.out.println("1. By price range");
+                System.out.println("2. By make/model");
+                System.out.println("3. By year range");
+                System.out.println("4. By color");
+                System.out.println("5. By mileage range");
+                System.out.println("6. By type");
+                System.out.println("7. Back to Main Menu");
+                System.out.print("Enter your choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+
+                switch (choice) {
+                    case 1:
+                        searchByPriceRange(vehicleDao, scanner);
+                        break;
+                    case 2:
+                        searchByMakeAndModel(vehicleDao, scanner);
+                        break;
+                    case 3:
+                        searchByYearRange(vehicleDao, scanner);
+                        break;
+                    case 4:
+                        searchByColor(vehicleDao, scanner);
+                        break;
+                    case 5:
+                        searchByMileageRange(vehicleDao, scanner);
+                        break;
+                    case 6:
+                        searchByType(vehicleDao, scanner);
+                        break;
+                    case 7:
+                        back = true;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
             }
+        } catch (InputMismatchException e){
+
+            System.out.println("Error occurred! Please enter number between 1 amd 7 inclusive.");
+
         }
+
     }
 
     private static void searchByPriceRange(VehicleDao vehicleDao, Scanner scanner) {

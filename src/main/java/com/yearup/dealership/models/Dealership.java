@@ -14,10 +14,12 @@ public class Dealership {
     }
 
     public int getDealershipId() {
+
         return dealershipId;
     }
 
     public void setDealershipId(int dealershipId) {
+
         this.dealershipId = dealershipId;
     }
 
