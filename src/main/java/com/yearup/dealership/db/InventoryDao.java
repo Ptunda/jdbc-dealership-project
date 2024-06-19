@@ -17,27 +17,44 @@ public class InventoryDao {
 
     public void addVehicleToInventory(String vin, int dealershipId) {
 
-        // TODO: Implement the logic to add a vehicle to the inventory
+
         String insertVehicleInInventorySQL = "INSERT INTO inventory\n" + "VALUES (?, ?)";
 
         try (Connection connection = dataSource.getConnection();
-            PreparedStatement insertVehiclePreparedStatement = connection.prepareStatement(insertVehicleInInventorySQL)
-        ){
+             PreparedStatement insertVehiclePreparedStatement = connection.prepareStatement(insertVehicleInInventorySQL)
+        ) {
 
             insertVehiclePreparedStatement.setInt(1, dealershipId);
             insertVehiclePreparedStatement.setString(2, vin);
 
             insertVehiclePreparedStatement.executeUpdate();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
 
-            e.printStackTrace();
+            System.out.println("Error adding vehicle to inventory " + e.getMessage());
 
         }
 
     }
 
     public void removeVehicleFromInventory(String vin) {
-        // TODO: Implement the logic to remove a vehicle from the inventory
+
+        
+        String removeVehicleFromInventorySQL = "DELETE FROM inventory\n" + "WHERE VIN = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement removeVehiclepreparedStatement = connection.prepareStatement(removeVehicleFromInventorySQL)
+        ) {
+
+            removeVehiclepreparedStatement.setString(1, vin);
+
+            removeVehiclepreparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            System.out.println("Error removing vehicle from inventory " + e.getMessage());
+
+        }
+
     }
 }
