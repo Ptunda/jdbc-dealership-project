@@ -102,16 +102,15 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "vin='" + vin + '\'' +
-                ", make='" + make + '\'' +
-                ", model='" + model + '\'' +
-                ", year=" + year +
-                ", sold=" + sold +
-                ", color='" + color + '\'' +
-                ", vehicleType='" + vehicleType + '\'' +
-                ", odometer=" + odometer +
-                ", price=" + price +
-                '}';
+
+        return  String.format("| %-20s | %-15s | %-15s | %-7d | %-7b | %-10s | %-15s | %-15d | %-10.2f |", vin, make, model, year, sold, color,
+                vehicleType, odometer, price);
+    }
+
+    public static String getHeader(){
+
+        return String.format("| %-20s | %-15s | %-15s | %-7s | %-7s | %-10s | %-15s | %-15s | %-10s |", "VIN", "make", "model", "year", "SOLD",
+                "color", "vehicleType", "odometer", "price");
+
     }
 }

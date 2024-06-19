@@ -47,7 +47,7 @@ public class Main {
 
         // Create a Scanner object for user input
         Scanner scanner = new Scanner(System.in);
-        
+
 
         boolean exit = false;
 
@@ -362,7 +362,9 @@ public class Main {
 
         } else {
 
-            System.out.println("\nSearch Results:");
+            System.out.println("\nSearch Results:\n");
+
+            System.out.println(Vehicle.getHeader());
 
             for (Vehicle vehicle : vehicles) {
                 System.out.println(vehicle);
