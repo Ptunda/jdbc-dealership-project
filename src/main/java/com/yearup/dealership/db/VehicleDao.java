@@ -19,7 +19,30 @@ public class VehicleDao {
 
     public void addVehicle(Vehicle vehicle) {
 
-        // TODO: Implement the logic to add a vehicle
+        
+        String insertVehicleSQL = "INSERT INTO vehicles\n" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement insertVehiclePreparedStatement = connection.prepareStatement(insertVehicleSQL)
+        ) {
+
+            insertVehiclePreparedStatement.setString(1, vehicle.getVin());
+            insertVehiclePreparedStatement.setString(2, vehicle.getMake());
+            insertVehiclePreparedStatement.setString(3, vehicle.getModel());
+            insertVehiclePreparedStatement.setInt(4, vehicle.getYear());
+            insertVehiclePreparedStatement.setBoolean(5, vehicle.isSold());
+            insertVehiclePreparedStatement.setString(6, vehicle.getColor());
+            insertVehiclePreparedStatement.setString(7, vehicle.getColor());
+            insertVehiclePreparedStatement.setInt(8, vehicle.getOdometer());
+            insertVehiclePreparedStatement.setDouble(9, vehicle.getPrice());
+
+            insertVehiclePreparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            System.out.println("Error adding vehicle" + e.getMessage());
+
+        }
 
     }
 
@@ -58,6 +81,7 @@ public class VehicleDao {
     }
 
     private Vehicle createVehicleFromResultSet(ResultSet resultSet) throws SQLException {
+
         Vehicle vehicle = new Vehicle();
         vehicle.setVin(resultSet.getString("VIN"));
         vehicle.setMake(resultSet.getString("make"));
@@ -69,5 +93,6 @@ public class VehicleDao {
         vehicle.setOdometer(resultSet.getInt("odometer"));
         vehicle.setPrice(resultSet.getDouble("price"));
         return vehicle;
+
     }
 }

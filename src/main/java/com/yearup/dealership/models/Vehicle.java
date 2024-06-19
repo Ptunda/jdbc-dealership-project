@@ -26,6 +26,8 @@ public class Vehicle {
         this.price = price;
     }
 
+
+
     public String getVin() {
         return vin;
     }

@@ -20,7 +20,7 @@ public class SalesDao {
 
     public void addSalesContract(SalesContract salesContract) {
 
-        
+
         String insertSalesContractSQL = "INSERT INTO sales_contracts (contract_id, VIN, sales_date, price)\n" +
                                         "VALUES (?, ?, ?, ?)";
 
