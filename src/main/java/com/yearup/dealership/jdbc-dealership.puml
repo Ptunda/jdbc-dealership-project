@@ -1,0 +1,213 @@
+@startuml
+
+package com.yearup.dealership{
+
+package models{
+
+
+class Dealership #gold {
+
+<<Object used to map dealerships records from the database>>
+
+-dealershipId: int
+-name:String
+-address: String
+-phone:String
++Dealership(dealershipId: int, name: String, address: String, phone: String)
++ getDealershipId(): int
++setDealershipId(dealershipId: int): void
++getName(): String
++setName(name: String): void
++getAddress(): String
++setAddress(address: String): void
++ getPhone(): String
++ setPhone(phone: String) : void
++toString(): String
++{static}getDealershipHeader(): String
+
+}
+
+class LeaseContract #pink {
+
+<<Object used to map lease contract records from the database>>
+
+-contractId:int
+-vin: String
+-leaseStart: LocalDate
+-LocalDate leaseEnd;
+-monthlyPayment: double
++LeaseContract(vin: String, leaseStart: LocalDate, leaseEnd: LocalDate, monthlyPayment: double)
++LeaseContract(contractId: int, vin: String, leaseStart: LocalDate, leaseEnd: LocalDate, monthlyPayment: double)
++getContractId(): int
++setContractId(contractId: int): void
++getVin(): String
++setVin(vin: String): void
++getLeaseStart(): LocalDate
++setLeaseStart(leaseStart: LocalDate): void
++getLeaseEnd(): LocalDate
++setLeaseEnd(leaseEnd: LocalDate): void
++getMonthlyPayment(): double
++setMonthlyPayment(monthlyPayment: double): void
++toString(): String
++{static}getLeaseHeader(): String
+
+}
+
+
+class SalesContract #beige {
+
+<<Object used to map sales contracts records from the database>>
+
+-contractId: int
+-vin: String
+-saleDate: LocalDate
+-price: double
++SalesContract(vin: String, saleDate: LocalDate, price: double)
++SalesContract(contractId: int, vin: String, saleDate: LocalDate, price: double)
++getContractId(): int
++setContractId(contractId: int): void
++getVin():String
++setVin(vin: String): void
++getSaleDate(): LocalDate
++setSaleDate(saleDate: LocalDate): void
++getPrice(): double
++setPrice(price: double): void
++toString(): String
++{static}salesContractHeader(): String
+
+}
+
+
+class Vehicle #lavender {
+
+<<Object used to map vehicle records from the database>>
+
+-vin: String
+-make: String
+-model: String
+-year: int
+-sold: boolean
+-color: String
+-vehicleType: String
+-odometer: int
+-price: double
++Vehicle()
++Vehicle(vin: String, make: String, model: String, year: int, sold: boolean, color: String, vehicleType: String, odometer: int, price: double)
++getVin(): String
++setVin(vin: String): void
++getMake(): String
++setMake(make: String): void
++getModel(): String
++setModel(model: String): void
++getYear(): int
++setYear(year: int): void
++isSold(): boolean
++setSold(sold: boolean):void
++getColor():String
++setColor(color: String): void
++getVehicleType(): String
++setVehicleType(vehicleType: String): void
++getOdometer(): int
++setOdometer(odometer: int): void
++getPrice():double
++setPrice(price): void
++toString(): String
++{static}getHeader(): String
+
+}
+
+
+}
+
+package db{
+
+
+class InventoryDao #orange {
+
+<<communicates with the database, handling CRUD operations pertaining inventory operations>>
+
+-dataSource: DataSource
++InventoryDao(dataSource: DataSource)
++addVehicleToInventory(vin: String, dealershipId: int): void
++removeVehicleFromInventory(vin: String): void
+
+}
+
+class LeaseDao #Yellow {
+
+<<Communicates to the database, handling CRUD operations pertaining to lease contracts>>
+
+-dataSource: DataSource
++LeaseDao(dataSource: DataSource)
++addLeaseContract(leaseContract: LeaseContract): void
+
+}
+
+
+class SalesDao #Green {
+
+<<Communicates to the database, handling CRUD operations pertaining to sales contracts>>
+
+-dataSource: DataSource
++SalesDao(dataSource: DataSource)
++addSalesContract(salesContract: SalesContract): void
+
+}
+
+
+class VehicleDao #gray {
+
+<<Communicates to the database, handling CRUD operations pertaining to vehicles>>
+
+-dataSource: DataSource
++VehicleDao(dataSource: DataSource)
++addVehicle(vehicle: Vehicle): void
++ removeVehicle(VIN: String): void
++searchByPriceRange(minPrice: double, maxPrice: double): List<Vehicle>{
++searchByMakeModel(userInputMake: String, userInputModel: String): List<Vehicle>
++searchByYearRange(userInputMinYear: int, userInputMaxYear: int): List<Vehicle>
++searchByColor(userInputColor: String): List<Vehicle>
++searchByMileageRange(userInputMinMileage: int, userInputMaxMileage: int): List<Vehicle>
++searchByType(userInputType: String): List<Vehicle>
+-createVehicleFromResultSet(resultSet: ResultSet): Vehicle
+
+}
+
+
+
+}
+
+package main {
+
+class Main #skyblue {
+
+<<runs the program and handles user interactions>>
+
++{static}main(): void
+
+-{static}addContractMenu(salesDao: SalesDao, leaseDao: LeaseDao, scanner: Scanner): void
+-{static}addSalesContract(salesDao: SalesDao, vin: String, scanner: Scanner): void
+-{static}addLeaseContract(leaseDao: LeaseDao, vin: String, scanner: Scanner): void
+-{static}searchVehiclesMenu(vehicleDao: VehicleDao, scanner: Scanner): void
+-{static}searchByPriceRange(vehicleDao: VehicleDao, scanner: Scanner): void
+-{static}searchByMakeAndModel(vehicleDao: VehicleDao, scanner:Scanner): void
+-{static}searchByYearRange(vehicleDao: VehicleDao, scanner: Scanner): void
+-{static}searchByColor(vehicleDao: VehicleDao, scanner: Scanner): void
+-{static}searchByMileageRange(vehicleDao: VehicleDao, scanner: Scanner): void
+-{static}searchByType(vehicleDao: VehicleDao, scanner:  Scanner): void
+-{static}displaySearchResults(vehicles: List<Vehicle> ): void
+-{static}addVehicleMenu(vehicleDao: VehicleDao, inventoryDao: InventoryDao, scanner: Scanner): void
+-{static}removeVehicleMenu(vehicleDao: VehicleDao, inventoryDao: InventoryDao, scanner: Scanner): void
++{static}generateRandomVin(): String
+
+
+}
+
+}
+
+
+
+
+}
+
+@enduml
