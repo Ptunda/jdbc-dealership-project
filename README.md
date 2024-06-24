@@ -84,7 +84,7 @@ Follow the prompts to interact with the system.
 ## Technologies Used
 - Java 21
 - MySQL Workbench 8.0 Community Edition
-- Intellij IDEA 24.1, Community Edition
+- Intellij IDEA 24.1 Community Edition
 - Git Bash 2.39.1.windows.1
 
 ## Author
